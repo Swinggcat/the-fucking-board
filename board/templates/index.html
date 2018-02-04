@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Board</title>
+    <style>
+        body {
+            font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+            font-size: 1em;
+        }
+
+        h2, .footer {
+            text-align: center;
+        }
+
+        textarea {
+            width: 100%;
+            resize: none;
+        }
+
+        .number {
+            color: #111;
+        }
+
+        input {
+            padding: 0.5em 1.5em;
+        }
+    </style>
+</head>
+<body>
+<h2>The Phvcking Board</h2>
+<form action="{{ url_for('page_new') }}" method="post">
+<textarea name="content" maxlength="1024" minlength="10" required="required" placeholder="Say something..." rows="2"></textarea>
+<span>You are now {{ session['name'] }}.</span><input type="button" value="Log♂In" onclick="window.location = '/login'"> or <input type="submit" value="Phvck♂You"/>!
+</form>
+<hr/>
+<div class="pagination">
+Page:
+    {%- for page in pagination.iter_pages() %}
+        {% if page %}
+            {% if page != pagination.page %}
+                <a href="{{ url_for_other_page(page) }}">{{ page }}</a>
+            {% else %}
+                <strong>{{ page }}</strong>
+            {% endif %}
+        {% else %}
+            <span class="number">…</span>
+        {% endif %}
+    {%- endfor %}
+    {% if pagination.has_next %}
+        <a href="{{ url_for_other_page(pagination.page + 1) }}">Next &raquo;</a>
+    {% endif %}
+</div>
+
+<div class="content">
+    {% for i in posts %}
+        <div>
+            <span class="number">#{{ i.id }}</span>
+            <strong>{{ i.user.name }}</strong>: {{ i.content }}
+        </div>
+    {% endfor %}
+</div>
+<hr/>
+<div class="footer">
+    <small>Copyleft 2018 The Great Philosopher DuckSoft. NO WARRANTY!</small>
+</div>
+</body>
+</html>
+

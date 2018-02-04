@@ -1,0 +1,7 @@
+<form action="{{ url_for('page_login') }}" method="post">
+    {% if msg %}<strong>Message: {{ msg }}</strong><br/>{% endif %}
+    <input type="text" name="username" placeholder="username"><br/>
+    <input type="password" name="password" placeholder="password"><br/>
+    <input type="submit" value="open♂the♂door!"><br/>
+    <input type="button" onclick="window.location='/reg'" value="i'm♂new♂philosopher">
+</form>
