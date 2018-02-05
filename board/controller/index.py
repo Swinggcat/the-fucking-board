@@ -7,7 +7,7 @@ from flask import render_template, request, url_for, redirect
 @app.route('/')
 def page_index():
     page = request.args.get('page', 1, type=int)
-    pagination = Post.query.order_by(Post.id.desc()).paginate(page,per_page=32,error_out=False)
+    pagination = Post.query.order_by(Post.id.desc()).paginate(page,per_page=16,error_out=False)
     posts = pagination.items
 
     return render_template('index.html', posts=posts, pagination=pagination, user=session.getname())
